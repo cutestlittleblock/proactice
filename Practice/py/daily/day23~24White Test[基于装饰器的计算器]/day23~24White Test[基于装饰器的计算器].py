@@ -8,12 +8,14 @@ class Main():
     #---defblock---#
 
     def __init__(self):
-        self.math=input("我需要算什么喵，数字和符号隔一个空格喵：").split()
+        self.token=re.compile(r"\d+\.?\d*|[+\-*/^=]")                    #最小token为"一串有长度数字+小数点+任意长度数字"(表示整小数)或"任意运算符"(加减乘除乘方)
+        self.put=self.token.findall(input("我需要算什么喵："))
+        self.math=[]
         self.math_list=[]
         self.num_list=[]
         self.operator_list=[]
         self.precision=False
-        self.operator_dict={"+":add,"-":minus,"*":times,"/":quotient,"^":power,"=":None,".":None}
+        self.operator_dict={"+":add,"-":minus,"*":times,"/":quotient,"^":power,"=":None}
         self.error="别乱输喵omo"
         self.answer=None
         self.t=0
@@ -28,6 +30,8 @@ class Main():
                 print(f"答案是{self.answer:.{self.precision}f}喵,计算用时约{self.t*1000:.4f}ms喵")
             except ZeroDivisionError:
                 print("分母不能为0喵omo")
+            except OverflowError:
+                print("太大了喵~受不了了喵~算不出来喵~")
 
     #---defblock---#
 
@@ -42,9 +46,24 @@ class Main():
     #---defblock---#
 
     def value(self):
-        if len(self.math)==0:
+        if len(self.put)==0:
             print("这根本没东西喵omo")
             return False
+
+        for i,p in enumerate(self.put):
+            if p is None:
+                continue
+            if p=="-":
+                if self.put[i-1] in self.operator_dict:
+                    try:
+                        self.math.append(-float(self.put[i+1])) 
+                    except ValueError:
+                        print(self.error)
+                        return False
+                    self.put[i+1]=None
+            else:
+                self.math.append(p)
+
         for n,m in enumerate(self.math):
             if n%2==0:
                 try:
