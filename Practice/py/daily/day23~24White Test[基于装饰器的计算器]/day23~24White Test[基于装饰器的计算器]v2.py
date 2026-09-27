@@ -8,7 +8,7 @@ class Main():
     #---defblock---#
 
     def __init__(self):
-        self.token=re.compile(r"\d+\.?\d*|[+\-*/^=]")                    #最小token为"一串有长度数字+小数点+任意长度数字"(表示整小数)或"任意运算符"(加减乘除乘方)
+        self.token=re.compile(r"\.\d+|\d+\.?\d*|[+\-*/^=]")                    #最小token为"一串有长度数字+小数点+任意长度数字"(表示整小数)或"任意运算符"(加减乘除乘方)
         self.put=self.token.findall(input("我需要算什么喵："))
         self.math=[]
         self.math_list=[]
@@ -80,7 +80,7 @@ class Main():
         if len(self.math_list)==1:
             print(f"这根本只有一个{self.math}喵")
             return False
-        elif "=" in self.math_list[-2::-1] or self.math_list[-1]!="=":
+        elif "=" in self.math_list[-2::-1]:
             print(f"{self.error}你的等号跑哪里去了喵omo")
             return False
 
