@@ -1,8 +1,4 @@
 import time
-#——————classblock——————#
-
-class ZeroDivisionError(Exception):
-    pass
 
 #——————classblock——————#
 
@@ -16,7 +12,7 @@ class Main():
         self.num_list=[]
         self.operator_list=[]
         self.precision=False
-        self.operator_dict={"+":add,"-":minus,"*":times,"/":quotient,"^":power,"=":None}
+        self.operator_dict={"+":add,"-":minus,"*":times,"/":quotient,"^":power,"=":None,".":None}
         self.error="别乱输喵omo"
         self.answer=None
         self.t=0
@@ -25,9 +21,7 @@ class Main():
     #---defblock---#
 
     def main_run(self):
-        if self.value()==False:
-            pass
-        else:
+        if self.value():
             try:
                 self.calculation()
                 print(f"答案是{self.answer:.{self.precision}f}喵,计算用时约{self.t*1000:.4f}ms喵")
