@@ -25,8 +25,8 @@ class Main():
             try:
                 self.calculation()
                 print(f"答案是{self.answer:.{self.precision}f}喵,计算用时约{self.t*1000:.4f}ms喵")
-            except ZeroDivisionError as z:
-                print(z)
+            except ZeroDivisionError:
+                print(self.error,"分母不能为0喵omo")
 
     #---defblock---#
 
@@ -113,11 +113,7 @@ def times(x,y):return x*y
 #---defblock---#
 
 @loud
-def quotient(x,y):
-    if y!=0:
-        return x/y
-    else:
-        raise ZeroDivisionError("分母不能为0喵omo") 
+def quotient(x,y):return x/y
 
 #---defblock---#
 
