@@ -83,6 +83,9 @@ class Main():
         elif "=" in self.math_list[-2::-1]:
             print(f"{self.error}你的等号跑哪里去了喵omo")
             return False
+        elif isinstance(self.math_list[-1],str) and self.math_list[-1]!="=":
+            print("你表达式没输完喵")
+            return False
 
         while self.precision is False:
             try:
