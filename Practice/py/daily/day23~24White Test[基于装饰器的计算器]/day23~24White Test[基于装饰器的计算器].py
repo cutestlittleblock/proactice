@@ -2,14 +2,7 @@ import time
 #——————classblock——————#
 
 class ZeroDivisionError(Exception):
-
-    #---defblock---#
-
-    def __str__(self):
-        super().__str__()
-        return "分母不能为0喵omo"
-
-    #---defblock---#
+    pass
 
 #——————classblock——————#
 
@@ -130,7 +123,7 @@ def quotient(x,y):
     if y!=0:
         return x/y
     else:
-        raise ZeroDivisionError() 
+        raise ZeroDivisionError("分母不能为0喵omo") 
 
 #---defblock---#
 
