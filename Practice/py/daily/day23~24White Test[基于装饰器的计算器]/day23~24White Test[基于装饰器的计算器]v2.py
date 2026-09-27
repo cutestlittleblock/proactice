@@ -47,7 +47,7 @@ class Main():
 
     def value(self):
         if len(self.put)==0:
-            print("这根本没东西喵omo")
+            print("这根本没东西可算喵omo")
             return False
 
         for i,p in enumerate(self.put):
