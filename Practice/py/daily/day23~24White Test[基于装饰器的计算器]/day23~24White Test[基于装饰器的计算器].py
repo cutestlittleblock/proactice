@@ -27,11 +27,11 @@ class Main():
         self.error="别乱输喵omo"
         self.answer=None
         self.t=0
+        self.calculation=self.timer(self.calculation)
 
     #---defblock---#
 
     def main_run(self):
-        self.calculation=self.timer(self.calculation)
         if self.value()==False:
             pass
         else:
