@@ -27,7 +27,7 @@ class Main():
                 self.calculation()
                 print(f"答案是{self.answer:.{self.precision}f}喵,计算用时约{self.t*1000:.4f}ms喵")
             except ZeroDivisionError:
-                print(self.error,"分母不能为0喵omo")
+                print("分母不能为0喵omo")
 
     #---defblock---#
 
@@ -42,6 +42,9 @@ class Main():
     #---defblock---#
 
     def value(self):
+        if len(self.math)==0:
+            print("这根本没东西喵omo")
+            return False
         for n,m in enumerate(self.math):
             if n%2==0:
                 try:
