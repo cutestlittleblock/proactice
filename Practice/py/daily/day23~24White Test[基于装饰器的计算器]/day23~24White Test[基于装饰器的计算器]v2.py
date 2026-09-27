@@ -8,7 +8,7 @@ class Main():
     #---defblock---#
 
     def __init__(self):
-        self.token=re.compile(r"\.\d+|\d+\.?\d*|[+\-*/^=]")                    #最小token为"一串有长度数字+小数点+任意长度数字"(表示整小数)或"任意运算符"(加减乘除乘方)
+        self.token=re.compile(r"\.\d*|\d+\.?\d*|[+\-*/^=]")                    #最小token为"一串有长度数字+小数点+任意长度数字"(表示整小数)或"任意运算符"(加减乘除乘方)
         self.put=self.token.findall(input("我需要算什么喵："))
         self.math=[]
         self.math_list=[]
@@ -54,10 +54,10 @@ class Main():
             if p is None:
                 continue
             if p=="-":
-                if self.put[i-1] in self.operator_dict:
+                if i==0 or self.put[i-1] in self.operator_dict:
                     try:
                         self.math.append(-float(self.put[i+1])) 
-                    except ValueError:
+                    except (ValueError,IndexError):
                         print(self.error)
                         return False
                     self.put[i+1]=None
