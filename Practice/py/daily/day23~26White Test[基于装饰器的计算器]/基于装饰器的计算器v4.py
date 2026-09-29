@@ -122,8 +122,9 @@ class Main():
                 else:
                     self.math_list.append(m)
         if len(self.math_list)==1:
-            print(f"这根本只有一个{self.math}喵,思考用时约{self.t*1000:.4f}ms喵")
-            return False
+            print(f"这根本只有一个{self.math}喵,是不是你用括号把整个式子包起来了喵")
+            self.answer=self.math_list[0]
+            return True
         elif "=" in self.math_list[-2::-1]:
             print(f"{self.error}你的等号跑哪里去了喵omo")
             return False
@@ -160,7 +161,6 @@ class Main():
 #——————classblock——————#
 
 class Pack():
-    main=Main()
 
     #---defblock---#
 
@@ -191,6 +191,7 @@ class Pack():
     #---defblock---#
 
     def large_pack(self,pack,packed,index):
+        self.large=[];self.large_packed=[]
         if "}" not in self.pack[index:]:
             print(self.error)
             return False
@@ -204,9 +205,10 @@ class Pack():
                 self.index+=1
 
             if "[" in self.large:
-                self.middle_pack(pack=self.large,packed=self.large_packed,index=0,under=True)
+                if not self.middle_pack(pack=self.large,packed=self.large_packed,index=0,under=True):return False
             else:
                 print(self.error)
+                return False
 
             main.put=self.large_packed
             if not main.main_run():return False
@@ -214,8 +216,6 @@ class Pack():
 
             packed.append(large_answer)
             
-            self.large=[]
-            self.large_packed=[]
             index+=1
             self.index+=1
             return True
@@ -229,6 +229,7 @@ class Pack():
         else:
             while index<len(pack):
                 if pack[index]=="[":
+                    self.middle=[];self.middle_packed=[]
                     index+=1
                     if under:pass
                     else:    
@@ -247,9 +248,10 @@ class Pack():
                         self.index+=1
 
                     if "(" in self.middle:
-                        self.small_pack(pack=self.middle,packed=self.middle_packed,index=0,under=True)
+                        if not self.small_pack(pack=self.middle,packed=self.middle_packed,index=0,under=True):return False
                     else:
                         print(self.error)
+                        return False
 
                     main.put=self.middle_packed
                     if not main.main_run():return False
@@ -265,8 +267,6 @@ class Pack():
                     else:
                         self.index+=1
 
-        self.middle=[]
-        self.middle_packed=[]
         if under:pass
         else:    
             self.index+=1
@@ -282,6 +282,7 @@ class Pack():
         else:
             while index<len(pack):
                 if pack[index]=="(":
+                    small=[]
                     index+=1
                     if under:pass
                     else:
@@ -311,7 +312,6 @@ class Pack():
                     if under:pass
                     else:
                         self.index+=1
-        small=[]
         if under:pass
         else:
             self.index+=1
